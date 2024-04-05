@@ -46,9 +46,11 @@ class TableContent(Content):
             if not isinstance(translation, str):
                 raise ValueError(f"Invalid translation type. Expected str, but got {type(translation)}")
 
+
             LOG.debug(translation)
             # Convert the string to a list of lists
-            table_data = [row.strip().split() for row in translation.strip().split('\n')]
+            # table_data = [row.strip().split() for row in translation.strip().split('\n')]
+            table_data = [row.strip().split() for row in translation.replace(" (", "(").strip().split('\n')]
             LOG.debug(table_data)
             # Create a DataFrame from the table_data
             translated_df = pd.DataFrame(table_data[1:], columns=table_data[0])
